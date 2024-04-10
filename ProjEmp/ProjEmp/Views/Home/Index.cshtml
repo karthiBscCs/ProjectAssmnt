@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Employee Details";
+}
+
+@model EmpVewMdl
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h2>Create Employee</h2>
+
+<form id="createEmployeeForm" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EmailId" class="control-label">Email</label>
+        <input asp-for="EmailId" class="form-control" />
+        <span asp-validation-for="EmailId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dept" class="control-label">Department</label>
+        <input asp-for="Dept" class="form-control" />
+        <span asp-validation-for="Dept" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" id="Crte" />
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#Crte').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $('#createEmployeeForm').attr('action'),
+                    type: 'POST',
+                    data: $('#createEmployeeForm').serialize(),
+                    success: function (response) {window.location.href = response.redirectUrl;},
+                    error: function (xhr, status, error) {console.log('Error:', error);}
+                });
+            });
+        });
+    </script>
+}

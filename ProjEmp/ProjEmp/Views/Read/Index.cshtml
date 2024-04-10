@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Employee Details";
+}
+@model List<ProjEmp.Models.EmpVewMdl>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h2>Employee List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Name</td>
+                <td>@employee.EmailId</td>
+                <td>@employee.Dept</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Read", new { id = employee.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Read", new { id = employee.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
